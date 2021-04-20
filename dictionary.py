@@ -10,12 +10,11 @@ data = json.load(open('data.json'))
 
 def translate(word_mean):
 
-    if word in data:
+    if word_mean in data:
         return data[word_mean]
     else:
         return "Word Not Found"
 
 
 word = input("Enter Word: ")
-print(translate(word))
-
+print(translate(word.lower()))
