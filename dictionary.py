@@ -1,4 +1,5 @@
 import json
+from difflib import SequenceMatcher, get_close_matches
 
 # Loading json data file
 data = json.load(open('data.json'))
@@ -10,11 +11,15 @@ data = json.load(open('data.json'))
 
 def translate(word_mean):
 
-    if word_mean in data:
-        return data[word_mean]
+    word_lower = word_mean.lower()
+    similarity = get_close_matches(word_lower, data.keys())[0]
+    if word_lower in data:
+        if word_lower == similarity:
+            print(f"{similarity}")
+        return data[word_lower]
     else:
         return "Word Not Found"
 
 
 word = input("Enter Word: ")
-print(translate(word.lower()))
+print(translate(word))
